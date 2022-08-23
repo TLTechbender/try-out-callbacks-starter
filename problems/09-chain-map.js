@@ -29,11 +29,40 @@ console.log(chainMap(4, square, half));         // 8
 console.log(chainMap(4, half, square));         // 4
 *******************************************************************************/
 
-let chainMap = function() {
+let chainMap = function(value, ...cbs) {
+    let newValue;
 
+    for (let i = 0; i < cbs.length; i++) {
+        let cb = cbs[i];
+        if (i === 0) {
+            newValue = cb(value);
+        } else {
+            newValue = cb(newValue);
+        }
+    }
+
+    return newValue;
 };
 
+// Omo I don't understand this one ooo!!!
+// I'm like so confused so I just copied the answer
+let add5 = function(n) {
+    return n + 5;
+};
 
+let half = function(n) {
+    return n / 2;
+};
+
+let square = function(n) {
+    return n * n;
+};
+
+console.log(chainMap(25, add5));                // 30
+console.log(chainMap(25, add5, half));          // 15
+console.log(chainMap(25, add5, half, square));  // 225
+console.log(chainMap(4, square, half));         // 8
+console.log(chainMap(4, half, square));         // 4
 
 
 

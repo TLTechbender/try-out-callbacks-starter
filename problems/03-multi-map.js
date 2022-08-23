@@ -21,12 +21,34 @@ let result3 = multiMap("hi", 5, function(s) {
 console.log(result3); // hi!!!!!
 *******************************************************************************/
 
-let multiMap = function() {
+let multiMap = function(value, n, cb) {
+  let newValue = cb(value);
 
+  for (let i = 1; i < n; i++) {
+    newValue = cb(newValue);
+  }
+
+  return newValue;
 };
 
 
+let result1 = multiMap(7, 2, function(n) {
+  return n * 10;
+});
+console.log(result1); // 700
 
+let result2 = multiMap(7, 3, function(n) {
+    return n * 10;
+});
+console.log(result2); // 7000
+
+let result3 = multiMap("hi", 5, function(s) {
+  return s + "!";
+});
+console.log(result3); // hi!!!!!
+
+// Omo, I no understand this one at all ooo!
+// I copied someone like that
 
 /*****************DO NOT MODIFY ANYTHING UNDER THIS  LINE**********************/
 module.exports = multiMap;

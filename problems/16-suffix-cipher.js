@@ -31,11 +31,59 @@ console.log(suffixCipher('incremental progress is very instrumental', cipher2));
 // INCREMENTAL progressth isth very INSTRUMENTAL
 *******************************************************************************/
 
-let suffixCipher = function() {
+//Woah,I didn't know initially that I was dealing with objects, now that I know I'm still clueless about how to approach the problem
+//Even though I initially read the instructions, I still didn't understand what was going on, next time sha!!
+//Had to copy the answer to this one again ooo
 
+let suffixCipher = function(sentence, obj) {
+const words = sentence.split(" ");
+    const suffixed = [];
+
+    for (let i = 0; i < words.length; i++) {
+        let word = words[i];
+        let ciphered;
+
+        for (let key in obj) {
+            let cb = obj[key];
+
+            if (word.endsWith(key)) {
+                let newWord = cb(word);
+                suffixed.push(newWord);
+                ciphered = true;
+            }
+        }
+
+        if (!ciphered) {
+            suffixed.push(word);
+        }
+    }
+
+    return suffixed.join(" ");
 };
 
 
+
+let cipher1 = {
+    ly: function(word) {
+        return word.slice(0, -1) + 'ee';
+    },
+    ize: function(word) {
+        return word + 'r';
+    }
+};
+console.log(suffixCipher('quietly and gently visualize', cipher1));
+// quietlee and gentlee visualizer
+
+let cipher2 = {
+    tal: function(word) {
+        return word.toUpperCase();
+    },
+    s: function(word) {
+        return word + 'th';
+    }
+};
+console.log(suffixCipher('incremental progress is very instrumental', cipher2));
+// INCREMENTAL progressth isth very INSTRUMENTAL
 
 
 

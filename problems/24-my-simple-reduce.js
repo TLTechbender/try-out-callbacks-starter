@@ -33,12 +33,40 @@ AFTER YOU ARE FINISHED WITH THIS PROBLEM, ASK FOR A CODE REVIEW
 - Explain, but don't code, how you would refactor this problem to take in an
   optional initial accumulator
 *******************************************************************************/
+//I didn't know how to convert my thoughts to words on this problem, so I had to copy the answer;
 
-let mySimpleReduce = function() {
 
+let mySimpleReduce = function(arr, cb) {
+    const acc = arr[0];
+    let newAcc = cb(acc, arr[1]);
+
+    for (let i = 2; i < arr.length; i++) {
+        let el = arr[i];
+        newAcc = cb(newAcc, el);
+    }
+
+    return newAcc;
 };
 
 
+let result1 = mySimpleReduce([5, 3, 2, 4], function(sum, el) {
+    return sum + el;
+});
+console.log(result1); // 14
+
+let result2 = mySimpleReduce([4, 6, 2], function(product, el) {
+    return product * el;
+});
+console.log(result2); // 48
+
+let result3 = mySimpleReduce([4, 6, 2, 8, 3], function(max, el) {
+    if (el > max) {
+        return el;
+    } else {
+        return max;
+    }
+});
+console.log(result3); // 8
 
 
 

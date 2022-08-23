@@ -36,9 +36,41 @@ console.log(alternatingMap(['hEy', 'EVERYone', 'whats', 'uP??'], yell, whisper))
 *******************************************************************************/
 
 
-let alternatingMap = function() {
-
+let alternatingMap = function(array,cb1,cb2) {
+let answer=[];
+    for(let i=0; i<array.length; i++){
+        let ele=array[i];
+        if(i%2===0){
+          step1=cb1(ele);
+            answer.push(step1);
+        }else{
+            step2=cb2(ele);
+            answer.push(step2);
+        }
+    }
+    return answer;
 };
+
+let triple = function (n) {
+    return 3 * n;
+};
+
+let half = function (n) {
+    return n / 2;
+};
+console.log(alternatingMap([7, 3, 2, 9, 8], triple, half));
+// [ 21, 1.5, 6, 4.5, 24 ]
+
+
+let yell = function (s) {
+    return s.toUpperCase() + '!';
+};
+
+let whisper = function (s) {
+    return '..' + s.toLowerCase() + '..';
+};
+console.log(alternatingMap(['hEy', 'EVERYone', 'whats', 'uP??'], yell, whisper));
+// [ 'HEY!', '..everyone..', 'WHATS!', '..up??..' ]
 
 
 
